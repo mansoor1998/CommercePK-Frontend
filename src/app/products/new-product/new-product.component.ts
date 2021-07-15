@@ -292,9 +292,8 @@ export class NewProductComponent implements OnInit {
 
   submit(event: Event){
 
-    this.productForm.updateValueAndValidity();
-    console.log(this.productForm);
-
+    this.productForm.markAllAsTouched();
+    // this.cd.markForCheck();
 
     if(this.productForm.valid){
       const productFormDto = this.productForm.value;
