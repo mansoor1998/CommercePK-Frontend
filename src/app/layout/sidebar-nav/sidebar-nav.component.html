@@ -1,0 +1,75 @@
+<nav class="side-navbar position-fixed top-0 start-0 h-100 ps-2" style="z-index: 10000000000;">
+
+    <!-- Navigation header -->
+    <div class="position-relative top-0 start-0 ps-3">
+       <header class="d-flex fw-bold fs-2 justify-content-start align-items-center pt-2">
+          <span>Foxy</span>
+          <!-- <i class="far fa-circle align-self-center fs-1"></i> -->
+       </header>
+    </div>
+    
+    <!-- Navigation body -->
+    <section class="nav-body">
+        <!-- Top Blur in navigation -->
+       <div class="bottom-fade position-sticky"></div>
+
+       <!-- Navigation list -->
+       <ul class="nav-list p-0 ms-2 me-0 mb-0 mt-3 me-3">
+          
+        <li class="mt-1 mb-1 cursor-pointer"  *ngFor="let item of menuItems">
+                
+            <ng-container *ngIf="item.items != null;else routeItem">
+                <div class="d-flex justify-content-between" (click)="toggleItem(item)" [ngClass]="{ 'active-black' : (item.Selected && !item.isChildEmpty()), 'active-royal-blue' : (item.Selected && item.isChildEmpty()), 'open': item.Selected , 'active-medium-white': !item.Selected && item.isChildSelected() }">
+
+                    <div class="d-flex align-items-center"> <!--this is an anchor tag-->
+                        <span class="me-2">
+                            <i [ngClass]="[item.icon]" ></i>
+                        </span>
+                        <span>{{item.name}}</span>
+                    </div>
+                    
+                    <!-- right arrow icon -->
+                    <i class="fas fa-chevron-right align-self-center" *ngIf="!item.isChildEmpty()" style="font-size: 0.8em;"></i>
+                </div>
+
+            </ng-container>
+
+            <ng-template #routeItem>
+                
+                <div [routerLink]="item.route" class="d-flex justify-content-between" (click)="toggleItem(item)" [ngClass]="{ 'active-black' : (item.Selected && !item.isChildEmpty()), 'active-royal-blue' : (item.Selected && item.isChildEmpty()), 'open': item.Selected , 'active-medium-white': !item.Selected && item.isChildSelected() }">
+
+                    <div class="d-flex align-items-center"> <!--this is an anchor tag-->
+                        <span class="me-2">
+                            <i [ngClass]="[item.icon]" ></i>
+                        </span>
+                        <span>{{item.name}}</span>
+                    </div>
+
+                    <!-- right arrow icon -->
+                    <i class="fas fa-chevron-right align-self-center" *ngIf="!item.isChildEmpty()" style="font-size: 0.8em;"></i>
+                </div>
+
+            </ng-template>
+ 
+                
+           
+            <!-- child navigation list -->
+            <ul class="sub-menu d-flex flex-column mt-1" *ngIf="!item.isChildEmpty()" [@openClose]=" item.Selected ? 'open' : 'closed' ">
+                <li *ngFor="let subItem of item.items" class="ps-2 pe-2" >
+                    <div class="d-flex justify-content-between" [routerLink]="subItem.route"  (click)="toggleItem(subItem)" [ngClass]="{ 'active-black' : (subItem.Selected && !subItem.isChildEmpty()), 'active-royal-blue' : (subItem.Selected && subItem.isChildEmpty()), 'open': subItem.Selected  }">
+                        <div class="d-flex align-items-center"> <!--this is an anchor tag-->
+                            <i class="me-3" [ngClass]="[subItem.icon]" style="font-size: 0.8em;"></i>
+                            <span>{{subItem.name}}</span>
+                        </div>
+                            <!-- right arrow icon -->
+                        <i class="fas fa-chevron-right align-self-center" *ngIf="(subItem.items != null && subItem.items.length > 0)" style="font-size: 0.8em;"></i>
+                    </div>
+                </li>
+            </ul>
+        
+        </li>
+       
+        </ul>
+    </section>
+
+</nav>

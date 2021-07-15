@@ -1,0 +1,131 @@
+ul, li {
+    padding: 0px;
+    margin: 0px;
+}
+
+.side-navbar{
+    width: var(--side-bar-width);
+    background-color: var(--color-ebony-clay);
+    height: var(--admin-sidenav-header-height);
+    /* z-index: var(--z-index-highest); */
+}
+
+.side-navbar > div:first-of-type { z-index: var(--z-index-high); }
+.side-navbar > div:first-of-type header span {color: #7367f0;}
+
+
+.side-navbar header { background-color: var(--color-ebony-clay); }
+
+/* .side-navbar header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    padding: 10px 10px 0 10px;
+} */
+
+.shadow-bottom{
+    background: linear-gradient(180deg,#283046 44%,rgba(40,48,70,.51) 73%,rgba(40,48,70,0));
+    display: block;
+    position: absolute;
+    z-index: 2;
+    height: 50px;
+    width: 100%;
+    pointer-events: none;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
+
+
+
+/*
+ *  navigation body 
+ */
+
+.nav-body {
+    margin: 0px;
+    position: relative;
+    top: 0px;
+    height: calc( 100% - var(--admin-sidenav-header-height) );
+    overflow-y: auto;
+}
+
+
+ .nav-body::-webkit-scrollbar-track
+ {
+     border-radius: 6px;
+     background-color: var(--color-ebony-clay);
+     transition: all 200ms ease;
+     
+ }
+ 
+ .nav-body::-webkit-scrollbar
+ {
+     width: 5px;
+     transition: all 200ms ease;
+     cursor: pointer;
+ }
+ 
+ .nav-body::-webkit-scrollbar-thumb
+ {
+     border-radius: 6px;
+     background-color: #b4b7bd88;
+     transition: all 200ms ease;
+     cursor: pointer;
+ }
+
+.nav-body::-webkit-scrollbar:hover {
+     width: 10px;
+}
+
+
+.nav-body ul li > div:first-of-type {
+    transition: all 200ms ease;
+    padding: 10px 15px 10px 15px;
+    border-radius: 4px;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+
+.nav-body ul .active-royal-blue {
+    background: linear-gradient(
+        118deg
+        ,#7367f0,rgba(115,103,240,.7));
+    background-image: linear-gradient( 118deg , rgb(115, 103, 240), rgba(115, 103, 240, 0.7));
+    box-shadow: 0 0 10px 1px rgb(115 103 240 / 70%);
+
+}
+
+.nav-body ul .active-black {
+    background-color: #161d31 !important;
+}
+
+.nav-body ul .active-medium-white {
+    background-color: #f5f5f5 !important;
+    color: #d0d2d6!important
+}
+
+.nav-body ul li > div:first-of-type:hover {
+    padding-left: 20px;
+}
+
+/* font awesome icon sytle */
+.fa-chevron-right{
+    transition: transform 200ms ease;
+}
+.open .fa-chevron-right {
+    transform: rotate(90deg);
+}
+
+
+.sub-menu {
+    transition: all 500ms ease;
+    overflow: hidden;
+}
+
+/* .sub-menu li {
+} */

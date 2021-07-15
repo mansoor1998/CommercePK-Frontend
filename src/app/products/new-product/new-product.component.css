@@ -1,0 +1,25 @@
+.save-button {
+ background-color: rgba(0, 128, 96, 1); color: white;
+
+}
+
+.save-button:hover {
+ background-color: rgba(0, 110, 82, 1);
+}
+
+
+table tbody tr:last-child, table tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.overflow-width { 
+    width: calc(100% + 200px);
+}
+
+.invalid {
+    font-size: 0.9em;
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    color: #dc3545;
+}

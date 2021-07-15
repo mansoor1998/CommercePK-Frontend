@@ -1,0 +1,16 @@
+<div id="app" class="overflow-hidden dark-layout">
+
+   <app-sidebar-nav></app-sidebar-nav>
+
+   <div id="app-header">
+      <div class="header-navbar-shadow"></div>
+      <app-header></app-header>
+   </div>
+
+   <div id="app-body">                                       
+      <section [@fadeInOut]="prepareRoute(outlet)">
+         <router-outlet #outlet="outlet"></router-outlet>
+      </section>
+   </div>
+
+</div>

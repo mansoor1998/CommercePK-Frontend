@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./assets/fonts/Montserrat.woff2');
+    font-style: normal;
+}
+
+:root {
+    --side-bar-width: 260px;
+
+    /*z-index values*/
+  --z-index-highest: 1000000000;
+  --z-index-high: 1000000;
+  --z-index-moderate: 100000;
+  --z-index-medium: 10000;
+  --z-index-low: -1000;
+  --z-index-lowest: -10000;
+
+  --color-mirage: #161d31;
+  --color-ebony-clay: #283046;
+
+  --admin-sidenav-header-height: 60px;
+  --admin-header-height: 60px; 
+
+  --admin-spacing-offset: 1.8em;
+
+}
+
+
+*, body, html, ul, li {
+    margin: 0px;
+    padding: 0px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bottom-fade {
+    z-index: var(--z-index-high);
+    display: block;
+  
+    width: 100%;
+    height: 10px;
+  
+    top: 0px;
+    
+    box-shadow: 0 5px 5px rgb(40 48 70);
+
+    background-color: var(--color-ebony-clay);
+    
+    /* transform: rotate(180deg); */
+}
+
+.wrapper-box {
+    background-color: var( --color-ebony-clay );
+    padding: 20px 1.5rem 20px 1.5rem;
+}
+
+.wrapper-box-rounded {
+    border-radius: 10px;
+}
+
+.wrapper-box-rounded-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.wrapper-box-rounded-bottom {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.wrapper-box-border-top {
+    border-top: 1px solid #404656;
+}
+
+.wrapper-box-border-bottom {
+    border-bottom: 1px solid #404656;
+}
+
+
+/* Admin App input */
+.dark-layout input, .dark-layout input:focus, .dark-layout select, .dark-layout input::placeholder { 
+    color: #FFF;
+    background-color: var(--color-ebony-clay);
+    border-color: #404656;
+}
+
+.dark-layout input::placeholder {
+    opacity: 0.7;
+}
+
+.dark-layout input[type=checkbox]{
+    font-size: 1.2rem;
+    border: 1px solid #fff;
+}
+
+.dark-layout input[type=checkbox]:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* ng-2 select custom style  */
+.dark-layout .ng-select-container, .dark-layout .ng-dropdown-panel-items .ng-option {
+    color: #FFF !important;
+    background-color: var(--color-ebony-clay) !important;
+    border-color: #404656 !important;
+}
+
+.dark-layout .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+    background-color: #4e45532d !important;
+}
+
+.dark-layout .ng-select-container .ng-value {
+    color: #000 !important;
+}
+
+.dark-layout .ng-select-single .ng-select-container .ng-value {
+    color: #FFF !important;
+}
+

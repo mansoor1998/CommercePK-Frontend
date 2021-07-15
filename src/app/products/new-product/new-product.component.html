@@ -1,0 +1,330 @@
+<!-- {{ productForm.value | json }} -->
+
+<div class="mt-2 mb-3">
+    <form class="overflow-hidden" [formGroup]="productForm" (ngSubmit)="submit($event)">
+        <div class="row wrapper mb-3 m-auto" style="max-width: 60rem;">
+            <div class="col-md-8">
+                <!-- Introduct of the product -->
+                <div class="wrapper-box wrapper-box-rounded mt-4 mb-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Title</label>
+                        <app-input [showError]="_title.invalid && _title.touched">
+                            <input type="text" formControlName="title" placeholder="Short sleve t-shirt" />
+                            <input-error>Please enter title</input-error>
+                        </app-input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label fw-bold">Description</label>
+                        <div #editor [froalaEditor]="options" >Hello, Froala!</div>
+                    </div>
+                </div>
+                
+                <!-- Pricing of the product -->
+                <div class="wrapper-box wrapper-box-rounded mt-4 mb-4">
+    
+                    <h4 class="mb-4">Pricing</h4>
+    
+                    <div class="mb-2">
+                    
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Price</label>
+                                <app-input [showError]="_price.invalid && _price.touched">
+                                    <input formControlName="unitPrice" type="number" min="0" step="0" placeholder="0.00" />
+                                </app-input>
+                                <div class="invalid" *ngIf="_price.touched && _price.hasError('required')">
+                                    Price is required
+                                </div>
+                                <div class="invalid" *ngIf="_price.touched && _price.hasError('pattern')">
+                                    invalid input
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Compare at Price</label>
+                                <app-input >
+                                    <input type="text" placeholder="0.00" />
+                                </app-input>
+                            </div>
+                        </div>    
+                    </div>
+    
+                    <div class="mt-4 row">
+                        <div class="col-auto">
+                            <label class="form-label fw-bold">Cost per item</label>
+                            <app-input [showError]="_cost.invalid && _cost.touched">
+                                <input type="text" formControlName="unitCost" type="text" min="0" placeholder="0.00" />
+                            </app-input>
+                            <div class="invalid" *ngIf="_cost.touched && _cost.hasError('required')">
+                                Cost is required
+                            </div>
+                            <div class="invalid" *ngIf="_cost.touched && _cost.hasError('pattern')">
+                                invalid input
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-label fw-bold">Margin</label>
+                            <p class="ps-1">-</p>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-label fw-bold">Profit</label>
+                            <p class="ps-1">-</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- <div class="wrapper-box wrapper-box-rounded p-0 mt-4 mb-4 overflow-hidden">
+                    <h4 class="pt-4 pe-4 px-4">Inventory</h4>
+    
+                    <div class="mb-4 pt-4 pe-4 px-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">SKU (Stock Keeping Unit)</label>
+                                <app-input>
+                                    <input type="text" />
+                                </app-input>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Barcode (ISBN, UPC, etc)</label>
+                                <app-input>
+                                    <input type="text" />
+                                </app-input>
+                            </div>
+                        </div>    
+                    </div>
+    
+    
+                    <div class="pt-4 pb-4 pe-4 px-4 mb-4" style="border-top: 1px solid #ddd">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Quantity</label>
+                                <app-input>
+                                    <input type="number" min="0" placeholder="0" />
+                                </app-input>
+                            </div>
+                        </div>    
+                    </div>
+                </div> -->
+                
+                <!-- Inventory of the product -->
+                <div class="mt-4 mb-4">
+                    
+                    <div class="wrapper-box wrapper-box-rounded-top pb-0">
+                        <h4 class="m-0">Inventory</h4>
+                    </div>
+    
+                    <div class="wrapper-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">SKU (Stock Keeping Unit)</label>
+                                <app-input>
+                                    <input type="text" formControlName="sku" />
+                                    <input-error>Throw an error</input-error>
+                                </app-input>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Barcode (ISBN, UPC, etc)</label>
+                                <app-input>
+                                    <input type="text" formControlName="barcode" />
+                                </app-input>
+                            </div>
+                        </div>    
+                    </div>
+    
+                    <div class="wrapper-box wrapper-box-border-top wrapper-box-rounded-bottom">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Quantity</label>
+                                <app-input [showError]="_quantity.touched && _quantity.invalid">
+                                    <input type="number" min="0" placeholder="0" step="1" formControlName="quantity" />
+                                </app-input>
+                                <div class="invalid d-block" style="font-size: 0.9em;" *ngIf="_quantity.touched && _quantity.hasError('required')" >
+                                    Quantity is required
+                                </div>
+                                <div class="invalid d-block" style="font-size: 0.9em;" *ngIf="_quantity.touched && _quantity.hasError('pattern')" >
+                                    invalid input
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Weight of the product -->
+                <div class="p-0 overflow-hidden mt-4 mb-4">
+                    <div class="wrapper-box wrapper-box-rounded-top">
+                        <div class="form-check">
+                            <input [checked]="isPhysicalProduct" (change)="toggleWeight()" class="form-check-input cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label mt-1 cursor-pointer" for="flexCheckDefault"> This is physical product </label>
+                        </div>
+                    </div>
+    
+                    <div *ngIf="isPhysicalProduct; else noWeightRequired" class="wrapper-box wrapper-box-border-top wrapper-box-rounded-bottom">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Weight</label>
+                                <app-input  [showError]="_weight.invalid && _weight.touched && isPhysicalProduct">
+                                    <input type="number" min="0" step="1" placeholder="0.00" formControlName="weight" />
+                                </app-input>
+                                <div class="invalid" *ngIf="_weight.touched && _weight.hasError('required') && isPhysicalProduct" >
+                                    Wieght is required
+                                </div>
+                                <div class="invalid" *ngIf="_weight.touched && _weight.hasError('pattern') && isPhysicalProduct" >
+                                    invalid input
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+    
+                    <ng-template #noWeightRequired>
+                        <div class="wrapper-box wrapper-box-border-top wrapper-box-rounded-bottom">
+                            <p style="opacity: 0.8;" class="m-0 p-0">
+                                The prodcut does not require any weight
+                            </p>
+                        </div>
+                    </ng-template>
+                </div>
+
+                <!-- Variance of the product -->
+                <div class="p-0 overflow-hidden mt-4 mb-4">
+                    <!-- Varince Title -->
+                    <div class="wrapper-box wrapper-box-rounded-top" [ngClass]="{ 'wrapper-box-rounded-bottom': !_hasVariant.value }">
+                        <p class="p-0 m-0 fw-bold">Variants</p>
+                        <div class="form-check ms-1 mt-2">
+                            <input formControlName="hasVariant" class="form-check-input cursor-pointer" type="checkbox" (change)="onVariantToggle($event)" id="Physical">
+                            <label class="form-check-label mt-1 cursor-pointer" for="Physical">
+                                This product has multiple options, like different size or colors
+                            </label>
+                        </div>
+                    </div>
+    
+                    <!-- Variance options -->
+                    <div *ngIf="_hasVariant.value;" class="wrapper-box wrapper-box-border-top" [ngClass]="{ 'wrapper-box-rounded-bottom': _skuVariants.controls.length === 0 }" formArrayName="productVariants">
+                        <div class="mt-1" *ngFor="let item of _productVariants.controls; let i = index; trackBy: trackByFn" [formGroupName]="i">
+                            <div class="d-flex justify-content-between">
+                                <span class="form-label fw-bold">Option {{ i + 1 }}</span>
+                                <span *ngIf="_productVariants.controls.length > 1" (click)="removeVariant(i)" class="form-label fw-bold"><a class="cursor-pointer" style="color: #0d6efd; text-decoration: underline;">Remove</a></span>
+                            </div>
+                            <!-- <a class="p-0 m-0" style="display: inline; float: right;">Remove</a> -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <input class="form-control" formControlName="name">
+                                </div>
+                                <div class="col-8">
+                                    <app-chips (chipInput)="addOption(item, $event)" [error]="getFormAttribute(item, 'isDuplicate')" >
+                                        <!-- <chip (removeChip)="remove(item)" [name]="item.name" *ngFor="let item of chips"></chip> -->
+                                        <chip (removeChip)="removeOption(item, j)" [name]="option" *ngFor="let option of getProductVariantOptions(i); let j = index; trackBy: trackByFn"></chip>
+                                        <input type="text" placeholder="Options" (keydown)="setFormAttribute(item, 'isDuplicate', false)"  >
+                                    </app-chips>
+                                    <div class="invalid" [ngStyle]="{'display': (getFormAttribute(item, 'isDuplicate') ? 'block': 'none')}" >You have already used this option</div>
+                                </div>    
+                            </div>
+                            <hr >
+                        </div>
+                        
+                        <button *ngIf="_productVariants.controls.length < 3" type="button" class="btn btn-secondary btn-md" (click)="addProductVariant()">Add another option</button>
+                    </div>
+
+                    <!-- SKU Variant using Cartisian product -->
+                    <div class="wrapper-box wrapper-box-border-top" *ngIf="_skuVariants.controls.length > 0 && _hasVariant.value" >
+                        <h4>Preview</h4>
+                        <div class="table mt-4" style="overflow-x: auto;">
+                            <table class="table text-white overflow-width">
+                                <thead>
+                                    <tr>
+                                      <th>variant</th>
+                                      <th style="width: 25%;">Price</th>
+                                      <th style="width: 15%;">Quantity</th>
+                                      <th style="width: 30%;">SKU</th>
+                                      <th></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody formArrayName="SKUVariants">
+                                    <tr *ngFor="let item of _skuVariants.controls; let i = index; trackBy: trackByFn;" [formGroupName]="i">
+                                        <ng-container *ngIf="!getFormAttribute ( item, 'isDeleted' ); else deleted">
+                                            <td>{{getSKUVariantOptionsName(i)}} </td>
+
+                                            <!-- <ng-container formArrayName="variants">
+                                                <ng-container *ngFor="let v of convertToFormArray(item).controls; let j = index" [formGroupName]="j">
+                                                    <input formControlName="variant.name" type="text" value="{{getProductVariantName(j)}}">
+                                                </ng-container>  
+                                            </ng-container> -->
+
+                                            <!-- this is essential part of the code -->
+                                            <td>
+                                                <app-input>
+                                                    <input class="padding-left-35px" type="number" formControlName="unitPrice">
+                                                    <span class="fw-bold">Rs</span>
+                                                </app-input>
+                                            </td>
+                                            <td>
+                                                <app-input>
+                                                    <input type="number" min="0" step="1" formControlName="trackInventory">
+                                                </app-input>
+                                            </td>
+                                            <td>
+                                                <app-input>
+                                                    <input type="text" formControlName="skuNumber">
+                                                </app-input>
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" (click)="setIsDeletedValue(item, true)" class="btn btn-danger text-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+                                        
+                                        <!-- custom deleted the item -->
+                                        <ng-template #deleted>
+                                            click <a class="cursor-pointer" (click)="setIsDeletedValue(item, false)"> Undo </a> to undo the variant
+                                        </ng-template>
+                                    </tr>
+                                  </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- <ng-template #noVariants class="wrapper-box wrapper-box-border-top wrapper-box-rounded-bottom">
+                        <div class="wrapper-box wrapper-box-border-top wrapper-box-rounded-bottom">
+                            <p style="opacity: 0.8;" class="m-0 p-0">
+                                This product has not variants
+                            </p>
+                        </div>
+                    </ng-template> -->
+
+                </div>
+            </div>
+            <!-- Second body varinat-status/categories definiiton primary category. -->
+            <div class="col-md-4">
+                <div class="wrapper-box wrapper-box-rounded mt-4 mb-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Product Status</label>
+                        <select class="form-select" value="Draft">
+                            <option value="Active">Active</option>
+                            <option value="Draft">Draft</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Category</label>
+                        <ng-select>
+                            <ng-option [value]="2">Sports</ng-option>
+                            <ng-option [value]="1">Tow</ng-option>
+                        </ng-select>
+                    </div>
+                    <div>
+                        <label class="form-label fw-bold">Other Categories</label>
+                        <ng-select [multiple]="true">
+                            <ng-option [value]="2">Sports</ng-option>
+                            <ng-option [value]="1">Tow</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>     
+        </div>
+
+        <hr class="mt-3 mb-3">
+
+        <div class="w-100 d-flex justify-content-end">
+            <button type="submit" class="btn save-button btn-md mb-2 me-2">Save</button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,19 @@
+#admin-header{
+    /* width: 100%; */
+    /* position: fixed;
+
+    width: calc( 100% - (var(--side-bar-width) + 20px)  );
+
+
+    margin-left: calc( var(--side-bar-width) + 20px );
+    margin-top: 20px;
+    margin-right: 20px; */
+    /* height: var(--admin-sidenav-header-height); */
+    /* min-height: 30px; */
+    background-color: var(--color-ebony-clay);
+    width: 100%;
+    max-height: var(--admin-header-height);
+    padding: 0.8em 1em; 
+    z-index: var(--z-index-highest);
+}
+

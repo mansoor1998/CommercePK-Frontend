@@ -1,0 +1,131 @@
+* {
+    color: inherit;
+}
+
+.wrapper-box ul li{
+    overflow: hidden;
+}
+.wrapper-box  ul li .selected::before {
+    content: '';
+    width: 100%; 
+    background-color: brown;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    height: 0.25rem;
+    z-index: 5;
+}
+
+.wrapper-box  ul li span::after {
+    content: '';
+    width: 100%; 
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    height: 0.25rem;
+    z-index: 2;
+    transition: all 0.2s;
+    width: 0;
+}
+
+.wrapper-box ul li:hover span::after {
+    width: 100%;   
+}
+
+.wrapper-shadow {
+    /* background: #ffffff; */
+    /* opacity: 0.1; */
+    box-shadow: 0 .5rem 1rem rgba(255,255,255,.15)!important;
+}
+
+.table>:not(caption)>*>*{
+    border-bottom: 0.1rem solid #404656;
+    /* text-align: center; */
+    vertical-align: middle;
+}
+
+.table tr th {
+    padding: 1rem 1rem;
+}
+
+.table tr td {
+    padding: 1.3rem 1rem;
+}
+
+
+
+
+.box, .box-placeholder {
+    display: inline-block;
+    /* background-color: #fff; */
+    /* margin: 30px; */
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+    /* max-width: 100%; */
+    vertical-align: top;
+    width: 100%;
+}
+.box hr, .box-placeholder hr {
+    margin: 0;
+    /* border-color: #f3f3f3; */
+}
+.box {
+    display: none;
+}
+.box .category {
+    display: block;
+    margin-bottom: 10px;
+}
+.box img {
+    max-width: 100%;
+}
+.box-placeholder {
+    font-size: 0;
+    line-height: 0;
+}
+.box-placeholder .text {
+    display: inline-block;
+    background-color: #ada0a0;
+    height: 12px;
+    border-radius: 100px;
+    margin: 5px 0;
+    min-width: 100px;
+    opacity: 0.1;
+    animation: fading 1.5s infinite;
+}
+.box-placeholder .text:first-child {
+    margin-top: 0;
+}
+.box-placeholder .text:last-child {
+    margin-bottom: 0;
+}
+.box-placeholder .text.link {
+    background-color: var(--blue);
+    opacity: 0.4;
+}
+.box-placeholder .text.line {
+    width: 100%;
+}
+.box-placeholder .text.category {
+    width: 100px;
+    margin-bottom: 10px;
+}
+.box-placeholder h4.text {
+    height: 20px;
+    margin: 3px 0;
+    opacity: 0.2;
+}
+.box-placeholder .image {
+    background-color: #f9f9f9;
+}
+@keyframes fading {
+    0% {
+        opacity: 0.1;
+   }
+    50% {
+        opacity: 0.2;
+   }
+    100% {
+        opacity: 0.1;
+   }
+}
