@@ -6,9 +6,10 @@ export class Person extends Interface implements Print {
     public name: string = 'second value';
     public age: number = 10;
   
-    constructor(){
-      console.log('i have added a constructor');
-    }
+    // constructor(){
+    //   super();
+    //   console.log('i have added a constructor');
+    // }
 
     // public getAttributes(): any[] {
     //     return Object.keys(this).map(x => x.toLocaleUpperCase());
