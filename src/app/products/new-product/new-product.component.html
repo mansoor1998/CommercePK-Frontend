@@ -203,10 +203,14 @@
                                 <span class="form-label fw-bold">Option {{ i + 1 }}</span>
                                 <span *ngIf="_productVariants.controls.length > 1" (click)="removeVariant(i)" class="form-label fw-bold"><a class="cursor-pointer" style="color: #0d6efd; text-decoration: underline;">Remove</a></span>
                             </div>
+                            <!-- {{item.valid}} -->
                             <!-- <a class="p-0 m-0" style="display: inline; float: right;">Remove</a> -->
                             <div class="row">
                                 <div class="col-4">
-                                    <input class="form-control" formControlName="name">
+                                    <input class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': item.invalid && item.touched }">
+                                    <div *ngIf="item.invalid && item.touched" class="invalid">
+                                        Name is required
+                                    </div>
                                 </div>
                                 <div class="col-8">
                                     <app-chips (chipInput)="addOption(item, $event)" [error]="getFormAttribute(item, 'isDuplicate')" >
@@ -247,22 +251,26 @@
                                                     <input formControlName="variant.name" type="text" value="{{getProductVariantName(j)}}">
                                                 </ng-container>  
                                             </ng-container> -->
-
                                             <!-- this is essential part of the code -->
                                             <td>
-                                                <app-input>
+                                                <!-- {{getAsFormGroup(item, 'unitPrice').invalid && getAsFormGroup(item, 'unitPrice').touched}} -->
+                                                <app-input [showError]="getAsFormGroup(item, 'unitPrice').invalid && getAsFormGroup(item, 'unitPrice').touched">
                                                     <input class="padding-left-35px" type="number" formControlName="unitPrice">
                                                     <span class="fw-bold">Rs</span>
+                                                    <input-error>Unit Price is required</input-error>
                                                 </app-input>
                                             </td>
                                             <td>
-                                                <app-input>
+                                                <app-input [showError]="getAsFormGroup(item, 'trackInventory').invalid && getAsFormGroup(item, 'trackInventory').touched">
                                                     <input type="number" min="0" step="1" formControlName="trackInventory">
+                                                    <input-error>Quantity is required</input-error>
                                                 </app-input>
                                             </td>
                                             <td>
-                                                <app-input>
+                                                
+                                                <app-input [showError]="getAsFormGroup(item, 'skuNumber').invalid && getAsFormGroup(item, 'skuNumber').touched">
                                                     <input type="text" formControlName="skuNumber">
+                                                    <input-error>SKU Number is required</input-error>
                                                 </app-input>
                                             </td>
                                             <td class="text-center">
@@ -274,7 +282,9 @@
                                         
                                         <!-- custom deleted the item -->
                                         <ng-template #deleted>
-                                            click <a class="cursor-pointer" (click)="setIsDeletedValue(item, false)"> Undo </a> to undo the variant
+                                            <td colspan="4" class="text-center">
+                                                click <a class="cursor-pointer" (click)="setIsDeletedValue(item, false)"> Undo </a> to undo the variant
+                                            </td>
                                         </ng-template>
                                     </tr>
                                   </tbody>
@@ -297,17 +307,23 @@
                 <div class="wrapper-box wrapper-box-rounded mt-4 mb-4">
                     <div class="mb-3">
                         <label class="form-label fw-bold">Product Status</label>
-                        <select class="form-select" value="Draft">
-                            <option value="Active">Active</option>
+                        <select fromControlName="status" class="form-select" value="Draft" [ngClass]="{ 'is-invalid': _status.invalid && _status.touched }">
                             <option value="Draft">Draft</option>
+                            <option value="Active">Active</option>
                         </select>
+                        <div class="invalid" *ngIf="_status.invalid && _status.touched">
+                            Status is required
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold">Category</label>
-                        <ng-select>
+                        <ng-select formControlName="categoryId" [ngStyle]="{ 'border': _categoryId.invalid && _categoryId.touched ? '1px solid #dc3545' : 'inherit' }">
                             <ng-option [value]="2">Sports</ng-option>
                             <ng-option [value]="1">Tow</ng-option>
                         </ng-select>
+                        <div class="invalid" *ngIf="_categoryId.invalid && _categoryId.touched">
+                            Category is required
+                        </div>
                     </div>
                     <div>
                         <label class="form-label fw-bold">Other Categories</label>
