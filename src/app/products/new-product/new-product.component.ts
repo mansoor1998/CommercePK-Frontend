@@ -24,7 +24,7 @@ export class NewProductComponent implements OnInit {
   // form builder of productVariants
   getProductVariantForm(){
     return this.formBuilder.group({
-      name: '',
+      name: ['', [Validators.required]],
       options: this.formBuilder.array([]),
       isDuplicate: false      
     });
@@ -33,9 +33,13 @@ export class NewProductComponent implements OnInit {
   // form builder of SKUVariants
   getSKUVariantForm(){
     return this.formBuilder.group({
-      skuNumber: ['', [Validators.required]],
+      skuNumber: ['', [(fg: FormGroup) => {  
+        let result: { required: boolean } | {} | null = null;
+        result = Validators.required(fg);
+        return fg.parent?.value.isDeleted === false ? result : null;
+      }]],
       trackInventory: [0, [Validators.required, Validators.pattern('[0-9]+')]],
-      unitPrice: [0, [Validators.required, Validators.pattern('[0-9]+')]],
+      unitPrice: [0, [Validators.required, Validators.pattern('[0-9]+(\\.[0-9]{1,2})?')]],
       variants: (() => this.formBuilder.array([  ]))(),
       isDeleted:  false
     });
@@ -52,7 +56,7 @@ export class NewProductComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       title: ['', Validators.required],
       code: '',
-      status: ['', [Validators.required]],
+      status: ['Draft', [Validators.required]],
       description: '',
       sku: '',
       barcode: '',
@@ -61,6 +65,7 @@ export class NewProductComponent implements OnInit {
       unitPrice: [0.00, [Validators.required, Validators.pattern('[0-9]+(\\.[0-9]{1,2})?')]],
       weight: [0.00, [Validators.required, Validators.pattern('[0-9]+(\\.[0-9]{1,2})?')]],
       hasVariant: false,
+      categoryId: ['', [Validators.required]],
       productVariants: this.formBuilder.array([/*this.getProductVariantForm()*/]),
       SKUVariants: this.formBuilder.array([])
     });
@@ -94,6 +99,14 @@ export class NewProductComponent implements OnInit {
     return this.productForm.get('hasVariant') as FormGroup;
   }
 
+  get _categoryId(): FormGroup {
+    return this.productForm.get('categoryId') as FormGroup;
+  }
+
+  get _status(): FormGroup {
+    return this.productForm.get('status') as FormGroup;
+  }
+
   // set _weight(value: number) {
   //   this.productForm.get('weight')?.setValue(value);
   // }
@@ -104,6 +117,11 @@ export class NewProductComponent implements OnInit {
 
   public setIsDeletedValue(item: AbstractControl, value: boolean){
     (item as FormControl).get('isDeleted')?.setValue(value);
+    (item as FormControl)?.get('skuNumber')?.updateValueAndValidity();
+  }
+
+  getAsFormGroup(ab: AbstractControl, key: string){
+    return (ab.get(key) as FormGroup);
   }
 
   // get form attribute casted to FormGroup
@@ -273,6 +291,9 @@ export class NewProductComponent implements OnInit {
   }
 
   submit(event: Event){
+
+    this.productForm.markAllAsTouched();
+
     if(this.productForm.valid){
       const productFormDto = this.productForm.value;
       const productVariants = (this.productForm.get('productVariants') as FormArray).value.map((x: {name: string}) => x.name);
@@ -288,7 +309,7 @@ export class NewProductComponent implements OnInit {
         console.error(e.message);
       }
   
-      console.log(productFormDto) ;
+      console.log('the form right here is valid') ;
     }
   }
 
