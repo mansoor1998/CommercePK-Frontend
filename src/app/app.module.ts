@@ -11,14 +11,14 @@ import { HeaderComponent } from './layout/header/header.component';
 // import { ReactiveFormsModule } from '@angular/forms';
 import { ShareModule } from 'src/shared/share.module';
 
-  
+
 
 @NgModule({
   declarations: [
     AppComponent,
     GenericComponent,
     SidebarNavComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +30,7 @@ import { ShareModule } from 'src/shared/share.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(applicationRef: ApplicationRef){
+  constructor(applicationRef: ApplicationRef) {
     // const originalTick = applicationRef.tick;
 
     // applicationRef.tick = function(){

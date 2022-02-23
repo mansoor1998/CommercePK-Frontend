@@ -1,7 +1,19 @@
+.dark-layout {
+    --shadow-color: linear-gradient(180deg ,rgba(22,29,49,.9) 44%,rgba(22,29,49,.43) 73%,rgba(22,29,49,0));
+    --arrow-background-color: #272b3d;
+}
+
+.light-layout {
+    --shadow-color: linear-gradient(180deg,hsla(0,0%,97.3%,.95) 44%,hsla(0,0%,97.3%,.46) 73%,hsla(0,0%,100%,0));
+    --arrow-background-color: #f2ecf0;
+}
+
+
+
 #app {
     min-height: 100vh;
-    background-color: var(--color-mirage);
-    color: white;
+    background-color: var(--theme-color-background);
+    color: var(--font-color);
     font-family: 'Montserrat',Helvetica,Arial,serif;
 }
 
@@ -13,8 +25,8 @@
     right: var(--admin-spacing-offset);
     margin-top: 1em;
 
-    z-index: var(--z-index-highest)
-
+    z-index: var(--z-index-highest);
+    transition: width, left var(--layout-animation-speed) ease;
     /* max-height: var(--admin-header-height); */
     /* margin-left: calc( var(--side-bar-width) + 20px ); */
     /* margin-top: 20px; */
@@ -25,15 +37,13 @@
     margin-left: calc( var(--side-bar-width) + var(--admin-spacing-offset) + 1px );
     margin-right: var(--admin-spacing-offset);  
     margin-top: calc( var(--admin-header-height) + var(--admin-spacing-offset) );
+    transition: margin-left var(--layout-animation-speed) ease;
+
     /* calc( var(--side-bar-width) + 20px ); */
 }
 
 .header-navbar-shadow {
     /* background: -webkit-gradient(linear,left top,left bottom,color-stop(44%,hsla(0,0%,97.3%,.95)),color-stop(73%,hsla(0,0%,97.3%,.46)),to(hsla(0,0%,100%,0))); */
-    background: linear-gradient(
-180deg
-,rgba(22,29,49,.9) 44%,rgba(22,29,49,.43) 73%,rgba(22,29,49,0));
-    left: 0;
 }
 
 .navbar-floating .header-navbar-shadow {
@@ -47,5 +57,31 @@
     height: 66px;
     position: fixed;
     top: 0;
+    left: 0;
     z-index: var(--z-index-low);
+    background: var(--shadow-color);
+}
+
+
+.dark-layout .nav-body ul {
+    --active-color: #161d31;
+}
+
+.light-layout .nav-body ul {
+    --active-color: #f5f5f5;
+}
+
+.custom-input input {
+    border: 1px solid var(--props-color);
+}
+
+@media only screen and (max-width: 1200px) {
+    #app-body {
+        margin-left: calc(var(--admin-spacing-offset) + 1px);  
+    }
+
+    #app-header {
+        width: calc( 100% - var(--admin-spacing-offset) - var(--admin-spacing-offset) );
+        left: var(--admin-spacing-offset);
+    }
 }

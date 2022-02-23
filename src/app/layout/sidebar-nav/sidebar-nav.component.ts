@@ -2,6 +2,7 @@ import { animate, group, state, style, transition, trigger } from '@angular/anim
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'src/shared/layout/MenuItem';
+import { SideBarService } from 'src/shared/sidebar';
 
 @Component({
   selector: 'app-sidebar-nav',
@@ -24,9 +25,27 @@ import { MenuItem } from 'src/shared/layout/MenuItem';
 })
 export class SidebarNavComponent implements OnInit {
 
-  
+
 
   menuItems: MenuItem[] = [
+    new MenuItem('Products', 'fas fa-tags', '', [
+      new MenuItem('All Products', 'far fa-dot-circle', '/admin/products', null),
+      new MenuItem('Create', 'far fa-dot-circle', '/admin/products/new', null),
+      new MenuItem('Inventory', 'far fa-dot-circle', '/admin/products/inventory', null),
+      new MenuItem('Transfers', 'far fa-dot-circle', '', null),
+    ]),
+    new MenuItem('Products', 'fas fa-tags', '', [
+      new MenuItem('All Products', 'far fa-dot-circle', '/admin/products', null),
+      new MenuItem('Create', 'far fa-dot-circle', '/admin/products/new', null),
+      new MenuItem('Inventory', 'far fa-dot-circle', '/admin/products/inventory', null),
+      new MenuItem('Transfers', 'far fa-dot-circle', '', null),
+    ]),
+    new MenuItem('Products', 'fas fa-tags', '', [
+      new MenuItem('All Products', 'far fa-dot-circle', '/admin/products', null),
+      new MenuItem('Create', 'far fa-dot-circle', '/admin/products/new', null),
+      new MenuItem('Inventory', 'far fa-dot-circle', '/admin/products/inventory', null),
+      new MenuItem('Transfers', 'far fa-dot-circle', '', null),
+    ]),
     new MenuItem('Products', 'fas fa-tags', '', [
       new MenuItem('All Products', 'far fa-dot-circle', '/admin/products', null),
       new MenuItem('Create', 'far fa-dot-circle', '/admin/products/new', null),
@@ -38,26 +57,28 @@ export class SidebarNavComponent implements OnInit {
 
 
   private parentChildSelected = false;
+  public isOpen = true;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+    private toggleService: SideBarService, public route: Router) {
   }
 
   ngOnInit(): void {
-    
+
     const pathname = window.location.pathname;
 
     //@ts-ignore
     // this.menuItems[0].items[0].Selected = true;
 
-    for(let item of this.menuItems){
-      if(item.items == null && item.route === pathname) {
+    for (let item of this.menuItems) {
+      if (item.items == null && item.route === pathname) {
         this.toggleItem(item);
         break;
       }
 
-      else if(item.items != null) {
-        for(let subItem of item.items){
-          if(subItem.items == null && subItem.route === pathname) {
+      else if (item.items != null) {
+        for (let subItem of item.items) {
+          if (subItem.items == null && subItem.route === pathname) {
             item.Selected = true;
             this.toggleItem(subItem);
             break;
@@ -65,13 +86,15 @@ export class SidebarNavComponent implements OnInit {
         }
       }
     }
+
+    this.toggleService.currentValue.subscribe((val) => { this.isOpen = val; });
   }
 
-  toggleItem(item: MenuItem){
+  toggleItem(item: MenuItem) {
 
-    
 
-    if(!item.isChildEmpty()) {
+
+    if (!item.isChildEmpty()) {
       item.Selected = !item.Selected;
       // for(let menuItem of this.menuItems.filter(x => !x.isChildEmpty())){
       //   if(menuItem !== item){
@@ -82,23 +105,29 @@ export class SidebarNavComponent implements OnInit {
     }
     else item.Selected = true;
 
-    for(let menuItem of this.menuItems){
-      let childItems = menuItem.items ? menuItem.items : []; 
-      for(let childItem of childItems){
-          if(item === childItem || this.parentChildSelected) {
-            continue;
-          }
-          childItem.Selected = false;
+    for (let menuItem of this.menuItems) {
+      let childItems = menuItem.items ? menuItem.items : [];
+      for (let childItem of childItems) {
+        if (item === childItem || this.parentChildSelected) {
+          continue;
+        }
+        childItem.Selected = false;
       }
 
       // eithre the parent item matches the orignal item.
       // or the child child item belongs to that parent.
       // then continue and dont set its value false becuase it has already been set true.
-      if(menuItem === item || menuItem.isChildAvailable(item)) continue;
-      
+      if (menuItem === item || menuItem.isChildAvailable(item)) continue;
+
       menuItem.Selected = false;
     }
 
+  }
+
+  routeLink(routeLink: string) {
+    if (window.location.pathname === routeLink) return;
+    this.toggleService.toggleSidebar(true);
+    this.route.navigate([routeLink]);
   }
 
 }

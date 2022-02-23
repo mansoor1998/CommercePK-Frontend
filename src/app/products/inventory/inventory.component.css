@@ -1,0 +1,4 @@
+.table>:not(caption)>*>*{
+    border-bottom: 0.1rem solid var(--props-color);
+    vertical-align: middle;
+}

@@ -1,0 +1,13 @@
+<div class="position-relative d-inline-block">
+    <!-- <button (click)="isOpen = !isOpen" class="btn btn-primary">press</button> -->
+    <ng-content select="button"></ng-content>
+    <div [@routerTransition] *ngIf="isOpen" class="position-absolute" style="top: 45px;">
+        <!-- <div class="container-overlay" (click)="toggle($event)"></div> -->
+        <div class="menu-dropdown rounded">
+            <ul>
+                <ng-content></ng-content>
+            </ul>
+        </div>
+    </div>
+
+</div>

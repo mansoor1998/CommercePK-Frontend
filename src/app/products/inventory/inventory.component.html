@@ -1,4 +1,148 @@
+<div class="p-2">
+    <h2>Products</h2>
+    <div class="box-shadow">
+        <div class="wrapper-box wrapper-box-rounded-top p-0 wrapper-box-border-bottom">
+            <!-- a inline list of elements -->
+            <ul class="d-flex m-0 p-0 ps-3 pe-3">
+                <li class="ms-2 me-2 cursor-pointer position-relative pe-2 ps-2">
+                    <span class="pt-3 pb-3 d-inline-block selected">
+                        All
+                    </span>
+                </li>
+                <li class="ms-2 me-2 cursor-pointer position-relative pe-2 ps-2">
+                    <span class="pt-3 pb-3 d-inline-block">
+                        Active
+                    </span>
+                </li>
+                <li class="ms-2 me-2 cursor-pointer position-relative pe-2 ps-2">
+                    <span class="pt-3 pb-3 d-inline-block">
+                        Draft
+                    </span>
+                </li>
+            </ul>
+        </div>
 
-<div style="width: 100%; height: 600px; background-color: red;">
+        <div>
+            <div class="wrapper-box pb-2">
+                <!-- Filter elements -->
+                <div class="filter d-flex">
+                    <div style="flex-basis: 300px;">
+                        <app-input>
+                            <input type="text" class="padding-left-35px">
+                            <i class="fas fa-search"></i>
+                        </app-input>
+                    </div>
+                </div>
 
+            </div>
+
+            <div class="wrapper-box p-0 overflow-hidden">
+                <!-- Prodcut Table -->
+                <div class="mt-4 overflow-auto">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-1 text-center">
+                                    <input class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <th class="col-4">Product</th>
+                                <th class="col-1">Status</th>
+                                <th class="col-2">Inventory</th>
+                                <th class="col-2">Type</th>
+                                <th class="col-2">Vendor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="text-center">
+                                    <input class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <td>
+                                    <!-- if the image is not available -->
+                                    <!-- <span class="d-inline-block p-2 pe-3 ps-3 border me-2 rounded">
+                                        <i class="fas fa-camera fs-3"></i>
+                                    </span> -->
+                                    <!-- if the image is available. -->
+                                    <span class="d-inline-block border rounded me-2 pt-1 pb-1">
+                                        <img src="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-4/img/1.3b312012.png"
+                                            alt="item" width="60" />
+                                    </span>
+                                    <span>
+                                        Batting Gear
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="p-1 rounded"
+                                        style="background-color: burlywood; color: white;">Draft</span>
+                                </td>
+                                <td>100</td>
+                                <td>Sports</td>
+                                <td>Mansoor</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">
+                                    <input class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <td>
+                                    <span class="d-inline-block p-2 pe-3 ps-3 border me-2 rounded">
+                                        <i class="fas fa-camera fs-3"></i>
+                                    </span>
+                                    <span>
+                                        Batting Gear
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="p-1 rounded"
+                                        style="background-color: burlywood; color: white;">Draft</span>
+                                </td>
+                                <td>100</td>
+                                <td>Sports</td>
+                                <td>Mansoor</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">
+                                    <input class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <td>
+                                    <span class="d-inline-block p-2 pe-3 ps-3 border me-2 rounded">
+                                        <i class="fas fa-camera fs-3"></i>
+                                    </span>
+                                    <span>
+                                        Batting Gear
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="p-1 rounded"
+                                        style="background-color: burlywood; color: white;">Draft</span>
+                                </td>
+                                <td>100</td>
+                                <td>Sports</td>
+                                <td>Mansoor</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- a place holder loader before the content loads -->
+        <div class="wrapper-box" *ngIf="false">
+            <div class="box-placeholder">
+                <div class="p-2">
+                    <span class="category text link"></span>
+                    <h4 class="text line"></h4>
+                    <h4 class="text"></h4>
+                </div>
+
+                <div class="excerpt p-2">
+                    <div class="text line"></div>
+                    <div class="text line"></div>
+                    <div class="text"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

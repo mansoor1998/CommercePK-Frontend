@@ -11,6 +11,7 @@ import { ShareModule } from 'src/shared/share.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -27,8 +28,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+    NgxPaginationModule
   ]
 })
 export class ProductsModule { }

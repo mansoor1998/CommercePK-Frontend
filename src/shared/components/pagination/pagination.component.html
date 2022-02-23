@@ -1,0 +1,25 @@
+<pagination-template #p="paginationApi" [id]="id" [maxSize]="maxSize" (pageChange)="pageChange.emit($event)">
+    <!--  left button -->
+    <span class="pagination-previous" (click)="p.previous()" [class.disabled]="p.isFirstPage()">
+        <button class="arrow">
+            <i class="fas fa-chevron-left cursor-pointer text-center"></i>
+        </button>
+    </span>
+
+    <!-- all the numbers in between -->
+    <span *ngFor="let page of p.pages; let i = index" [class.current]="p.getCurrent() === page.value"
+        (click)="(p.getCurrent() !== page.value) ? p.setCurrent(page.value) : null" class="pages cursor-pointer"
+        [ngClass]="{ 'border-left': i == 0, 'border-right': i == p.pages.length - 1  }">
+        <span class="w-100 h-100" [ngClass]="{'selected': (p.getCurrent() === page.value)}">
+            {{ page.label }}
+        </span>
+    </span>
+
+    <!-- right button -->
+    <span class="pagination-next" [class.disabled]="p.isLastPage()" (click)="p.isLastPage() ? null : p.next()">
+        <button class="arrow">
+            <i class="fas fa-chevron-right cursor-pointer text-center"></i>
+        </button>
+    </span>
+
+</pagination-template>

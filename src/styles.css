@@ -17,39 +17,66 @@
   --z-index-low: -1000;
   --z-index-lowest: -10000;
 
-  --color-mirage: #161d31;
-  --color-ebony-clay: #283046;
-
+  /* --theme-color-background: #161d31;
+  --color-ebony-clay: #283046; */
+  --layout-animation-speed: 200ms;   
   --admin-sidenav-header-height: 60px;
   --admin-header-height: 60px; 
 
   --admin-spacing-offset: 1.8em;
 
+  --props-color-2: #7367f0;
+}
+
+
+.dark-layout {
+    --font-color: #fff;
+    --theme-color-background: #161d31;
+    --color-ebony-clay: #283046;
+    --props-color: #404656;
+    --color-surface-hoverd: #161d31;
+}
+
+
+.light-layout {
+    ---font-color: #484a55;
+    --theme-color-background: #f8f8f8;
+    --color-ebony-clay: #fff;
+    --props-color: #ebe9f1;
+    --color-surface-hoverd: rgba(246, 246, 247, 1);
 }
 
 
 *, body, html, ul, li {
     margin: 0px;
     padding: 0px;
+    color: var(--font-color);
 }
 
 .cursor-pointer {
     cursor: pointer;
 }
 
+.color-inherit {
+    color: inherit;
+}
+
+.dark-layout .bottom-fade {
+    --fade-shadow: 0 5px 5px rgb(40 48 70);
+}
+
+.light-layout .bottom-fade {
+    --fade-shadow: 0 5px 5px #fff;
+}
+
 .bottom-fade {
     z-index: var(--z-index-high);
     display: block;
-  
     width: 100%;
     height: 10px;
-  
     top: 0px;
-    
-    box-shadow: 0 5px 5px rgb(40 48 70);
-
+    box-shadow: var(--fade-shadow);
     background-color: var(--color-ebony-clay);
-    
     /* transform: rotate(180deg); */
 }
 
@@ -73,51 +100,180 @@
 }
 
 .wrapper-box-border-top {
-    border-top: 1px solid #404656;
+    border-top: 1px solid;
+    border-top-color: var(--props-color);
 }
 
 .wrapper-box-border-bottom {
-    border-bottom: 1px solid #404656;
+    border-bottom: 1px solid;
+    border-bottom-color: var(--props-color);
 }
 
+
+.box-shadow {
+    box-shadow: 0 .125rem .25rem var(--props-color) !important;
+}
 
 /* Admin App input */
-.dark-layout input, .dark-layout input:focus, .dark-layout select, .dark-layout input::placeholder { 
-    color: #FFF;
+.dark-layout input, .dark-layout input:focus, .dark-layout select, .dark-layout input::placeholder,
+.light-layout input, .light-layout input:focus, .light-layout select, .light-layout input::placeholder { 
+    color: inherit;
     background-color: var(--color-ebony-clay);
-    border-color: #404656;
+    border-color: var(--props-color);
 }
 
-.dark-layout input::placeholder {
+.dark-layout input::placeholder,
+.light-layout input::placeholder {
     opacity: 0.7;
 }
 
-.dark-layout input[type=checkbox]{
+.dark-layout input[type=checkbox],
+.light-layout input[type=checkbox]{
     font-size: 1.2rem;
-    border: 1px solid #fff;
+    border: 1px solid inherit;
 }
 
-.dark-layout input[type=checkbox]:checked {
+.dark-layout input[type=checkbox]:checked,
+.light-layout input[type=checkbox]:checked {
     background-color: #0d6efd;
     border-color: #0d6efd;
 }
 
 /* ng-2 select custom style  */
-.dark-layout .ng-select-container, .dark-layout .ng-dropdown-panel-items .ng-option {
+.dark-layout .ng-select-container, .dark-layout .ng-dropdown-panel-items .ng-option,
+.light-layout .ng-select-container, .light-layout .ng-dropdown-panel-items .ng-option {
     color: #FFF !important;
     background-color: var(--color-ebony-clay) !important;
     border-color: #404656 !important;
 }
 
-.dark-layout .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+.dark-layout .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.light-layout .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
     background-color: #4e45532d !important;
 }
 
-.dark-layout .ng-select-container .ng-value {
+.dark-layout .ng-select-container .ng-value,
+.light-layout .ng-select-container .ng-value {
     color: #000 !important;
 }
 
-.dark-layout .ng-select-single .ng-select-container .ng-value {
+.dark-layout .ng-select-single .ng-select-container .ng-value,
+.light-layout .ng-select-single .ng-select-container .ng-value {
     color: #FFF !important;
 }
 
+
+
+
+
+ /* style for scrollbar */
+
+ .scroll-bar::-webkit-scrollbar-track
+ {
+    border-radius: 6px;
+    background-color: var(--color-ebony-clay);
+    /* transition: all 200ms ease; */
+ }
+ 
+ .scroll-bar::-webkit-scrollbar
+ {
+     width: 5px;
+     /* transition: all 200ms ease; */
+     cursor: pointer;
+ }
+ 
+ .scroll-bar::-webkit-scrollbar-thumb
+ {
+     border-radius: 6px;
+     background-color: #b4b7bd88;
+     /* transition: all 200ms ease; */
+     cursor: pointer;
+ }
+
+.scroll-bar::-webkit-scrollbar:hover {
+     width: 10px;
+}
+
+
+
+/* css styles for dropdown menu */
+.menu-dropdown ul { 
+    width: 140px;
+    max-width: 200px;
+    /* width: 100px; */
+    overflow-x: auto;
+    background-color: var(--color-ebony-clay);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 .125rem .25rem var(--props-color) !important;
+    padding: 10px;
+    display: inline-block;
+}
+
+.menu-dropdown ul li {
+    padding: 10px 5px 10px 5px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+}
+
+.menu-dropdown ul li:hover {
+    background-color: var(--color-surface-hoverd);
+}
+
+/* table styles. */
+.table>:not(caption)>*>*{
+    border-bottom: 0.1rem solid var(--props-color);
+    vertical-align: middle;
+}
+
+.table tr th {
+    padding: 1rem 1rem;
+}
+
+.table tr td {
+    padding: 1.3rem 1rem;
+}
+
+.table tbody .selected, .table tbody tr:hover {
+    background-color: var(--color-surface-hoverd);
+}
+
+/* ul and li */
+.wrapper-box ul li{
+    overflow: hidden;
+}
+.wrapper-box  ul li .selected::before {
+    content: '';
+    width: 100%; 
+    background-color: var(--props-color-2);
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    height: 0.25rem;
+    z-index: 5;
+}
+
+.wrapper-box  ul li span::after {
+    content: '';
+    width: 100%; 
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    height: 0.25rem;
+    z-index: 2;
+    transition: all 0.2s;
+    width: 0;
+}
+
+.wrapper-box ul li:hover span::after {
+    width: 100%;   
+}
+
+@media only screen and (max-width: 1200px) {
+    .side-navbar-width {
+        left: 0 !important;
+    }
+}

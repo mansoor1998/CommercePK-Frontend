@@ -1,0 +1,25 @@
+<div class="counter d-flex align-items-stretch p-1 rounded">
+    <button (click)="onclick('decrement')" class="btn btn-sm border-0 rounded-0 py-0">
+        <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="dash"
+            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-dash b-icon bi">
+            <g transform="translate(8 8) scale(1.25 1.25) translate(-8 -8)">
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"></path>
+            </g>
+        </svg>
+    </button>
+
+    <span class="flex-grow-1 align-self-center border-left border-right text-center">
+        {{counter}}
+    </span>
+
+    <button (click)="onclick('increment')" class="btn btn-sm border-0 rounded-0 py-0">
+        <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="plus"
+            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-plus b-icon bi">
+            <g transform="translate(8 8) scale(1.25 1.25) translate(-8 -8)">
+                <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                </path>
+            </g>
+        </svg>
+    </button>
+</div>

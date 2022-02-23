@@ -1,6 +1,6 @@
 <div class="p-2">
     <h2>Products</h2>
-    <div class="wrapper-shadow">
+    <div class="box-shadow">
         <div class="wrapper-box wrapper-box-rounded-top p-0 wrapper-box-border-bottom">
             <!-- a inline list of elements -->
             <ul class="d-flex m-0 p-0 ps-3 pe-3">
@@ -13,14 +13,14 @@
                     <span class="pt-3 pb-3 d-inline-block">
                         Active
                     </span>
-                </li><li class="ms-2 me-2 cursor-pointer position-relative pe-2 ps-2">
+                </li>
+                <li class="ms-2 me-2 cursor-pointer position-relative pe-2 ps-2">
                     <span class="pt-3 pb-3 d-inline-block">
                         Draft
                     </span>
                 </li>
             </ul>
         </div>
-
         <div *ngIf="show">
             <div class="wrapper-box pb-2">
                 <!-- Filter elements -->
@@ -29,75 +29,145 @@
                         <app-input>
                             <input type="text" class="padding-left-35px">
                             <i class="fas fa-search"></i>
-                        </app-input>    
+                        </app-input>
                     </div>
                 </div>
-    
+
             </div>
-    
-            <div class="wrapper-box p-0 overflow-hidden" >
+
+            <div class="wrapper-box p-0 overflow-hidden">
                 <!-- Prodcut Table -->
                 <div class="mt-4 overflow-auto">
-                    <table class="table" >
+                    <div *ngIf="!productSelected();" class="ms-3 mb-3">
+                        <button class="table-button rounded-left btn-border-left" (click)="selectAllProducts()">
+                            <span>
+                                <input [checked]="isProductChecked" class="form-check-input cursor-pointer"
+                                    style="margin-top: 0.1em;" type="checkbox">
+                            </span>
+                            <span class="ms-2"><b class="me-2">{{ selectedProductCount }}</b>Selected</span>
+                        </button>
+                        <app-menu>
+                            <button class="table-button rounded-right btn-border-right" #btn>More Actions<i
+                                    class="ms-2 fas fa-chevron-down"></i></button>
+                            <menu-list>Set Draft</menu-list>
+                            <menu-list>Set Active</menu-list>
+                            <menu-list>Delete Products</menu-list>
+                        </app-menu>
+
+                    </div>
+                    <table class="table">
                         <thead>
-                          <tr>
-                            <th class="col-1 text-center">
-                                <input class="form-check-input cursor-pointer" type="checkbox">
-                            </th>
-                            <th class="col-4">Product</th>
-                            <th class="col-1" >Status</th>
-                            <th class="col-2">Inventory</th>
-                            <th class="col-2">Type</th>
-                            <th class="col-2">Vendor</th>
-                          </tr>
+                            <tr *ngIf="productSelected();">
+                                <th class="col-1 text-center">
+                                    <input [checked]="isProductChecked" (change)="selectAllProducts()"
+                                        class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <th class="col-4">Product</th>
+                                <th class="col-1">Status</th>
+                                <th class="col-2">Inventory</th>
+                                <th class="col-2">Type</th>
+                                <th class="col-2">Vendor</th>
+                            </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th class="text-center">
-                                <input class="form-check-input cursor-pointer" type="checkbox">
-                            </th>
-                            <td>
-                                <span class="d-inline-block p-2 pe-3 ps-3 border me-2 rounded">
-                                    <i class="fas fa-camera fs-3"></i>
-                                </span>
-                                <span>
-                                    Batting Gear
-                                </span>
-                            </td>
-                            <td>
-                                <span class="p-1 rounded" style="background-color: burlywood; color: white;">Draft</span>
-                            </td>
-                            <td>100</td>
-                            <td>Sports</td>
-                            <td>Mansoor</td>
-                          </tr>
+
+                            <tr [ngClass]="{ 'selected': product.selected }"
+                                *ngFor="let product of products | paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: products.length }">
+                                <th class="text-center col-1">
+                                    <input [(ngModel)]="product.selected" class="form-check-input cursor-pointer"
+                                        (change)="onProdcutChecked()" type="checkbox">
+                                </th>
+                                <td class="col-4">
+                                    <span *ngIf="product.imgUrl;else imgProp"
+                                        class="d-inline-block border rounded me-2 pt-1 pb-1">
+                                        <img [src]="product.imgUrl" alt="item" width="60" />
+                                    </span>
+                                    <ng-template #imgProp>
+                                        <span class="d-inline-block p-2 pe-3 ps-3 border me-2 rounded">
+                                            <i class="fas fa-camera fs-3"></i>
+                                        </span>
+                                    </ng-template>
+                                    <span>
+                                        {{product.title}}
+                                    </span>
+                                </td>
+                                <td class="col-1">
+                                    <span class="p-1 rounded"
+                                        style="background-color: burlywood; color: white;">Draft</span>
+                                </td>
+                                <td class="col-2">{{product.inventory}}</td>
+                                <td class="col-2">{{product.type}}</td>
+                                <td class="col-2">{{ product.vendor }}</td>
+                            </tr>
+
+                            <!-- <tr>
+                                <th class="text-center">
+                                    <input class="form-check-input cursor-pointer" type="checkbox">
+                                </th>
+                                <td>
+                                    <span class="d-inline-block border rounded me-2 pt-1 pb-1">
+                                        <img src="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-4/img/1.3b312012.png"
+                                            alt="item" width="60" />
+                                    </span>
+                                    <span>
+                                        Batting Gear
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="p-1 rounded"
+                                        style="background-color: burlywood; color: white;">Draft</span>
+                                </td>
+                                <td>100</td>
+                                <td>Sports</td>
+                                <td>Mansoor</td>
+                                <td>This is </td>
+                            </tr> -->
                         </tbody>
                     </table>
-    
-                   
                 </div>
             </div>
         </div>
 
-         <!-- a place holder loader before the content loads -->
-         <div class="wrapper-box" *ngIf="!show">
+        <!-- a place holder loader before the content loads -->
+        <div class="wrapper-box" *ngIf="!show">
             <div class="box-placeholder">
                 <div class="p-2">
-                  <span class="category text link"></span>
-                  <h4 class="text line"></h4>
-                  <h4 class="text"></h4>
+                    <span class="category text link"></span>
+                    <h4 class="text line"></h4>
+                    <h4 class="text"></h4>
                 </div>
-            
+
                 <div class="excerpt p-2">
-                  <div class="text line"></div>
-                  <div class="text line"></div>
-                  <div class="text"></div>
+                    <div class="text line"></div>
+                    <div class="text line"></div>
+                    <div class="text"></div>
                 </div>
-              </div>
+            </div>
         </div>
 
     </div>
-</div>  
+</div>
+
+<div class="mt-3 d-flex justify-content-end">
+    <app-pagination (pageChange)="p =$event" id="server"></app-pagination>
+</div>
 
 
+<!-- <div class="mt-4" style="height: 300px; background-color: var(--props-color);">
+    <app-menu>
+        <button class="table-button rounded-right btn-border-right" #btn>More Actions<i
+                class="ms-2 fas fa-chevron-down"></i></button>
+        <menu-list>Set Draft</menu-list>
+        <menu-list>Set Active</menu-list>
+        <menu-list>Delete Products</menu-list>
+    </app-menu>
+</div> -->
 
+
+<!-- some shit piece of code -->
+
+<!-- <app-menu>
+    <button #btn class="btn btn-primary">My Button</button>
+    <menu-list>Set As Active</menu-list>
+    <menu-list>Set As Draft</menu-list>
+</app-menu> -->

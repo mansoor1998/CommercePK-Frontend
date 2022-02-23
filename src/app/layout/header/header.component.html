@@ -1,5 +1,104 @@
-
-
 <div id="admin-header" class="rounded">
-    this is a side nav header you like it
+    <div *ngIf="!toggle" (click)="toggleSidebar(false)" class="overlay-wrapper"></div>
+    <div class="d-flex justify-content-between align-items-center h-100">
+        <!-- first div for hamburger -->
+        <div>
+            <span class="cursor-pointer" (click)="toggleSidebar(false)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-menu">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </span>
+        </div>
+
+        <!-- second div for night mode and etc. -->
+        <div>
+            <span class="cursor-pointer mx-2 d-inline-block" (click)="changeThememode($event)">
+                <ng-container *ngIf="thememode=='light'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-moon">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+
+                </ng-container>
+
+                <ng-container *ngIf="thememode=='dark'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </ng-container>
+            </span>
+            <!-- cart counter value -->
+            <!-- <div class="d-inline-block"> -->
+            <span #cartIcon class="cursor-pointer mx-2 d-inline-block position-relative">
+                <span class="cart-badge badge bg-primary">5</span>
+                <span (click)="toggleCart = !toggleCart;">
+                    <svg data-v-a58fee00="" xmlns="http://www.w3.org/2000/svg" width="21px" height="21px"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="text-body feather feather-shopping-cart">
+                        <circle data-v-a58fee00="" cx="9" cy="21" r="1"></circle>
+                        <circle data-v-a58fee00="" cx="20" cy="21" r="1"></circle>
+                        <path data-v-a58fee00="" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
+                        </path>
+                    </svg>
+                </span>
+
+
+                <!-- <div class="position-absolute" style="right: 0; top: 45px; width: 420px;">
+                    asdjfksa;lkdfj
+                </div> -->
+                <div #cart *ngIf="toggleCart" class="position-absolute app-cartnotify" style="right: 0; top: 45px;"
+                    [@routerTransition]>
+                    <app-cart (closeEvent)="closeCart();">
+                        <app-cart-list>
+                            <app-cart-item *ngFor="let c of counter; let i = index">
+                                <div class="d-flex">
+                                    <div class="align-self-start px-1">
+                                        <img style="width: 70px;"
+                                            src="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-4/img/1.3b312012.png"
+                                            alt="">
+                                    </div>
+                                    <div class="d-flex justify-content-between flex-grow-1 ps-1 px-2" style="gap: 5px;">
+                                        <div class="flex-grow-1">
+                                            <span class="fw-bold d-block"
+                                                style="text-overflow: ellipsis; overflow: hidden; width: 120px">Apple
+                                                watch Series 5</span>
+                                            <span style="color: gray; font-size: 0.8em">By Apple</span>
+                                        </div>
+                                        <div class="text-end align-self-center" style="width: 100px;">
+                                            <app-counter [counter]="c" (onChange)="setCounter(i, $event)"></app-counter>
+                                        </div>
+                                        <div class="text-end align-self-center" style="width: 70px;">
+                                            $129.99
+                                        </div>
+                                    </div>
+                                </div>
+                            </app-cart-item>
+
+
+                        </app-cart-list>
+                    </app-cart>
+                </div>
+            </span>
+            <!-- </div> -->
+        </div>
+    </div>
 </div>
+
+
+
+<!-- delete this llater only for test purposes. -->

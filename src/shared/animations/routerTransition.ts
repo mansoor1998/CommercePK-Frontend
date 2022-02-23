@@ -22,7 +22,10 @@ export function slideFromBottom() {
     state('*', style({ 'padding-top': '0px', opacity: '1' })),
     transition(':enter', [
       animate('0.33s ease-out', style({ opacity: '1', 'padding-top': '0px' }))
-    ])
+    ]),
+    transition(':leave', [
+      animate('0.33s ease-out', style({ opacity: '0', 'padding-top': '20px' }))
+    ]),
   ]);
 }
 
@@ -59,34 +62,34 @@ export function slideUp() {
 const animationTimeFrame = 300;
 
 export function fadeInOut() {
-  return trigger( 'fadeInOut', [
+  return trigger('fadeInOut', [
     // animation transtion from one state (any name) to another state (any name)
     transition('* => *', [
-        style({ position: 'relative' }),
-        // current position of enter and leave state
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '100%'
-          })
-        ], { optional: true }),
-        // enter position starting with initial state from where it would animate
-        query(':enter', [style({ transform: 'scale(0.8)', opacity: 0 })], { optional: true }),
-        
-        // the leave state has started its animating process
-        query(':leave', animateChild(), { optional: true }),
+      style({ position: 'relative' }),
+      // current position of enter and leave state
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: '100%'
+        })
+      ], { optional: true }),
+      // enter position starting with initial state from where it would animate
+      query(':enter', [style({ transform: 'scale(0.8)', opacity: 0 })], { optional: true }),
 
-        // the leave state will animate to (  1.2 scale and fades away )
-        query(':leave', [ animate(`${animationTimeFrame.toString()}ms ease`, style({ transform: 'scale(1.1)', opacity: 0 }) ) ], { optional: true }),
+      // the leave state has started its animating process
+      query(':leave', animateChild(), { optional: true }),
 
-        // the enter state will animate to ( 1 scale and fade in ).
-        query(':enter', [animate(`${animationTimeFrame.toString()}ms ease`, style({ transform: 'scale(1)', opacity: 1 }))], { optional: true }),
+      // the leave state will animate to (  1.2 scale and fades away )
+      query(':leave', [animate(`${animationTimeFrame.toString()}ms ease`, style({ transform: 'scale(1.1)', opacity: 0 }))], { optional: true }),
 
-        // the enter state has started animating. (Both leave and enter process are syncrhonous)
-        query(':enter', animateChild(), { optional: true })
-      ])
+      // the enter state will animate to ( 1 scale and fade in ).
+      query(':enter', [animate(`${animationTimeFrame.toString()}ms ease`, style({ transform: 'scale(1)', opacity: 1 }))], { optional: true }),
+
+      // the enter state has started animating. (Both leave and enter process are syncrhonous)
+      query(':enter', animateChild(), { optional: true })
+    ])
   ]);
 }
 

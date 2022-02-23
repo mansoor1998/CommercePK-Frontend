@@ -1,0 +1,16 @@
+<div class="container-overlay" (click)="closeEvent.emit()"></div>
+<div class="app-cart rounded position-relative">
+    <div class="d-flex justify-content-between align-items-center cart-header p-3">
+        <span class="h4 m-0">My Cart</span>
+        <span class="badge badge-primary">5 items</span>
+    </div>
+    <div class="cart-list wrapper-box-border-bottom wrapper-box-border-top scroll-bar">
+        <ng-content select="app-cart-list"></ng-content>
+    </div>
+    <div class="cart-footer p-3">
+        <div class="mb-2">
+            <p class="m-0">Total: 100 Euros</p>
+        </div>
+        <button class="btn btn-primary w-100">Checkout</button>
+    </div>
+</div>

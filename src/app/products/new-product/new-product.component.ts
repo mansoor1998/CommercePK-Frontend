@@ -204,11 +204,8 @@ export class NewProductComponent implements OnInit {
    * Performs cartesian product on multiple arrays. 
    * literally no idea how the code works. The code is taken form stack overflow
    * link => https://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript 
-   * @param first {string[]}
-   * @param rest {string[][]} 
-   * @returns {string[][]}
    */
-   private cartesian = (arr: string[][]) => {
+   private cartesian = (arr: string[][]): string[][] => {
     arr = arr.filter( x => Array.isArray(x) && x.length > 0 );
     // this one on bottom is faster
     return arr.reduce(function(a,b){
@@ -230,7 +227,6 @@ export class NewProductComponent implements OnInit {
       return ((variant as FormGroup).get('options') as FormArray).controls.map(x => x.value).filter(x => x && x.length > 0);
     });
       
-    //@ts-ignore
     const totalVariantCombinations: string[][] = this.cartesian(variantOptions);
 
     const skuVariants = (this.productForm.get('SKUVariants') as FormArray);
@@ -300,16 +296,24 @@ export class NewProductComponent implements OnInit {
   
       try{
         for(let i = 0; i < productFormDto.SKUVariants.length; i++){
+          if ( productFormDto.SKUVariants[i].isDeleted ) {
+            productFormDto.SKUVariants.splice(i, 1);
+            continue;
+          }
+
+          // set all the variant names in skuVariant
           let variant = productFormDto.SKUVariants[i].variants;
           for(let j = 0; j < variant.length; j++){
             variant[j]['variant.name'] = productVariants[j];
           }
+
+          delete productFormDto.SKUVariants[i].isDeleted;
         }  
+        console.log(productFormDto) ;
       } catch (e) {
         console.error(e.message);
       }
   
-      console.log('the form right here is valid') ;
     }
   }
 

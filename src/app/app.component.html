@@ -2,15 +2,15 @@
 
    <app-sidebar-nav></app-sidebar-nav>
 
-   <div id="app-header">
+   <div id="app-header" class="box-shadow">
+      <!-- using the Cart  -->
       <div class="header-navbar-shadow"></div>
       <app-header></app-header>
    </div>
 
-   <div id="app-body">                                       
+   <div id="app-body">
       <section [@fadeInOut]="prepareRoute(outlet)">
          <router-outlet #outlet="outlet"></router-outlet>
       </section>
    </div>
-
 </div>
